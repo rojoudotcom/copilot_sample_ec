@@ -17,3 +17,5 @@ body { margin: 0; padding: 32px 16px; background: #f6f8fa; font-family: system-u
 .summary .minus { color: #cf222e; }
 .summary .total { font-size: 20px; font-weight: 700; border-top: 1px solid #d0d7de; padding-top: 10px; margin-top: 4px; }
 .error { margin: 0; padding: 12px 20px; background: #ffebe9; color: #cf222e; }
+.hint { padding: 16px 0; color: #9a6700; line-height: 1.7; }
+.hint code { background: #f6f8fa; padding: 1px 6px; border-radius: 4px; }
