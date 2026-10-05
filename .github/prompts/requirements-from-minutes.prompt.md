@@ -10,11 +10,11 @@ description: 議事録から要件定義書（Markdown）を作成し、判断�
 ## 入力
 
 - 議事録: #file:docs/minutes.md
-- テンプレート: #file:docs/templates/requirements-template.md
+- テンプレート: #file:docs/templates/requirements_template.md
 
 ## 手順
 
-1. テンプレート `docs/templates/requirements-template.md` の各セクションを埋める
+1. テンプレート `docs/templates/requirements_template.md` の各セクションを埋める
 2. 議事録に書かれていることだけを記載する（推測で補完しない）
 3. 埋められない項目・曖昧な項目は「確認事項」として列挙し、私に質問する
 4. 出力は `docs/requirements.md`（正本＝md）。xlsx は作らない
