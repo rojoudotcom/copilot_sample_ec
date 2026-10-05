@@ -37,9 +37,9 @@ npm run typecheck
 | `docs/minutes.md` | 料金計算機能の要件ヒアリング議事録 |
 | `docs/design.md` | 現行の設計書（受け入れ条件つき） |
 | `docs/points.md` | 購入ポイントの仕様 |
-| `docs/templates/requirements_template.md` | 要件定義書のテンプレート |
-| `docs/templates/adr_template.md` | ADR（設計判断の記録）のテンプレート |
-| `docs/templates/testing.instructions.md` | 単体テストの規則のテンプレート（`.github/instructions/` に置いて使う） |
+| `docs/templates/requirements-template.md` | 要件定義書のテンプレート |
+| `docs/templates/adr-template.md` | ADR（設計判断の記録）のテンプレート |
+| `docs/templates/testing-rules-template.md` | 単体テストの規則のテンプレート（`.github/instructions/` に置いて使う） |
 | `.github/prompts/` | prompt file（`/requirements-from-minutes`・`/design-from-requirements`） |
 | `.github/skills/` | Agent Skills（要件定義書レビュー） |
 
