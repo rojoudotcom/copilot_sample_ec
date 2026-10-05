@@ -32,9 +32,11 @@ npm run typecheck
 |------|------|
 | `src/pricing.ts` | 料金計算の純粋関数（小計・会員割引・クーポン・送料・合計） |
 | `src/pricing.test.ts` | Vitest のテスト |
+| `src/points.ts` | 購入ポイントの計算（プロンプトのコツのデモで使う。テストはまだ無い） |
 | `web/` | 買い物かごの画面（HTML・CSS・TypeScript）。計算は `src/pricing.ts` の `calculateCharge` を呼ぶ |
 | `docs/minutes.md` | 料金計算機能の要件ヒアリング議事録 |
 | `docs/design.md` | 現行の設計書（受け入れ条件つき） |
+| `docs/points.md` | 購入ポイントの仕様 |
 | `docs/templates/requirements_template.md` | 要件定義書のテンプレート |
 | `docs/templates/adr_template.md` | ADR（設計判断の記録）のテンプレート |
 | `docs/templates/testing.instructions.md` | 単体テストの規則のテンプレート（`.github/instructions/` に置いて使う） |
