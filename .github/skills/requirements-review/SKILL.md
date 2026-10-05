@@ -21,7 +21,7 @@ description: 要件定義書（docs/requirements.md）の不足・曖昧さ・�
 
    未記入のセクション・未置換のプレースホルダ・曖昧語が出る。ここで出た分は、
    人が読む前に直せる
-2. `docs/templates/requirements_template.md` の各セクションが埋まっているかを確認する
+2. `docs/templates/requirements-template.md` の各セクションが埋まっているかを確認する
 3. `checklist.md` の観点を順に当てる
 4. `docs/minutes.md` と突き合わせ、次の2方向で差分を出す
    - 議事録にあるのに要件定義書にない（**漏れ**）
