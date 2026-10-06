@@ -67,11 +67,27 @@ describe('calculateCharge 正常系', () => {
     expect(result.total).toBe(5000);
   });
 
+  it('ギフトラッピングを選ぶと合計に150円が加算される', () => {
+    const result = calculateCharge(cart({ giftWrapping: true, items: [item({ unitPrice: 1000 })] }));
+
+    expect(result.giftWrappingFee).toBe(150);
+    expect(result.total).toBe(1650);
+  });
+
+  it('送料無料判定にギフトラッピング料金を含めない', () => {
+    const result = calculateCharge(cart({ giftWrapping: true, items: [item({ unitPrice: 4850 })] }));
+
+    expect(result.giftWrappingFee).toBe(150);
+    expect(result.shippingFee).toBe(500);
+    expect(result.total).toBe(5500);
+  });
+
   it('空のカートは合計0円になる', () => {
     const result = calculateCharge(cart({ items: [] }));
 
     expect(result.total).toBe(0);
     expect(result.shippingFee).toBe(0);
+    expect(result.giftWrappingFee).toBe(0);
   });
 });
 

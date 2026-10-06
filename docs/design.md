@@ -20,8 +20,8 @@
 | 型 | 主なフィールド |
 |----|---------------|
 | `CartItem` | `id` / `name` / `unitPrice` / `quantity` / `onSale` |
-| `Cart` | `items` / `isMember` / `couponCode`（任意） |
-| `PricingResult` | `subtotal` / `memberDiscount` / `couponDiscount` / `shippingFee` / `total` |
+| `Cart` | `items` / `isMember` / `couponCode`（任意） / `giftWrapping`（任意） |
+| `PricingResult` | `subtotal` / `memberDiscount` / `couponDiscount` / `shippingFee` / `giftWrappingFee` / `total` |
 
 ## 3. 機能設計
 
@@ -31,7 +31,8 @@
 | 会員割引の算出 | `Cart` | 会員のみ、セール品を除いた合計の10%（切り捨て） |
 | クーポン割引の算出 | `Cart` | `SAVE500` で500円引き。会員割引との併用は不可 |
 | 送料の算出 | 割引後の金額 | 5,000円以上で0円、未満で500円 |
-| 合計の算出 | `Cart` | 小計 − 会員割引 − クーポン割引 ＋ 送料 |
+| ギフトラッピング料金の算出 | `Cart` | 選択時に150円 |
+| 合計の算出 | `Cart` | 小計 − 会員割引 − クーポン割引 ＋ 送料 ＋ ギフトラッピング料金 |
 
 ## 4. 受け入れ条件
 
@@ -43,6 +44,8 @@
 - [ ] クーポン `SAVE500` で500円引きになる
 - [ ] 割引後の金額が5,000円未満のとき、送料500円が加算される
 - [ ] 割引後の金額が**ちょうど5,000円**のとき、送料は無料になる
+- [ ] ギフトラッピングを選択すると合計に150円が加算される
+- [ ] 送料無料の判定にギフトラッピング料金を含めない
 - [ ] カートが空のとき、合計は0円になる（送料も加算しない）
 
 ### 異常系
