@@ -1,0 +1,42 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]     # main に入ったら
+
+permissions: { contents: read, pages: write, id-token: write }
+
+jobs:
+  test:
+    name: テスト
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+
+  deploy:
+    name: 買い物かごの画面を公開する
+    needs: test          # テストが通ったときだけ公開する
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: 画面をビルドする
+        run: npx vite build web --base ./ --outDir ../dist --emptyOutDir
+      - uses: actions/upload-pages-artifact@v5
+        with: { path: dist }
+      - id: deployment
+        uses: actions/deploy-pages@v5
+      - run: echo "公開 URL ${{ steps.deployment.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY
