@@ -115,6 +115,14 @@ describe('calculateCharge 正常系', () => {
     expect(result.shippingFee).toBe(0);
     expect(result.total).toBe(5150);
   });
+
+  it('空カートでラッピングを選択してもラッピング料金は0円になる', () => {
+    const result = calculateCharge(immutableCart({ giftWrapping: true, items: [] }));
+
+    expect(result.giftWrappingFee).toBe(0);
+    expect(result.total).toBe(0);
+    expect(Number.isInteger(result.total)).toBe(true);
+  });
 });
 
 describe('calculateCharge 異常系', () => {
