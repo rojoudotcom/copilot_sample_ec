@@ -35,6 +35,7 @@ function renderSummary() {
     items,
     isMember: $<HTMLInputElement>('member').checked,
     couponCode: coupon === '' ? undefined : coupon,
+    giftWrapping: $<HTMLInputElement>('gift-wrapping').checked,
   };
   const error = $('error');
   try {
@@ -44,6 +45,7 @@ function renderSummary() {
       <dt>会員割引（10%・セール品を除く）</dt><dd class="minus">${minus(r.memberDiscount)}</dd>
       <dt>クーポン割引</dt><dd class="minus">${minus(r.couponDiscount)}</dd>
       <dt>送料（5,000円以上で無料）</dt><dd>${yen(r.shippingFee)}</dd>
+      <dt>ギフトラッピング</dt><dd>${yen(r.giftWrappingFee)}</dd>
       <dt class="total">合計</dt><dd class="total">${yen(r.total)}</dd>`;
     error.hidden = true;
   } catch (e) {
@@ -64,6 +66,7 @@ $('items').addEventListener('click', (ev) => {
 });
 $('member').addEventListener('change', renderSummary);
 $('coupon').addEventListener('input', renderSummary);
+$('gift-wrapping').addEventListener('change', renderSummary);
 
 renderItems();
 renderSummary();

@@ -20,6 +20,13 @@ function cart(overrides: Partial<Cart> = {}): Cart {
   };
 }
 
+function immutableCart(overrides: Partial<Cart> = {}): Cart {
+  const input = cart(overrides);
+  input.items.forEach((cartItem) => Object.freeze(cartItem));
+  Object.freeze(input.items);
+  return Object.freeze(input);
+}
+
 describe('calculateCharge 正常系', () => {
   it('小計は単価×数量の合計になる', () => {
     const result = calculateCharge(
@@ -72,6 +79,41 @@ describe('calculateCharge 正常系', () => {
 
     expect(result.total).toBe(0);
     expect(result.shippingFee).toBe(0);
+  });
+
+  it('ラッピング未選択では料金が加算されない', () => {
+    const result = calculateCharge(immutableCart({ items: [item({ unitPrice: 1000 })] }));
+
+    expect(result.giftWrappingFee).toBe(0);
+    expect(result.total).toBe(1500);
+  });
+
+  it('ラッピング選択時は合計に150円が加算される', () => {
+    const input = immutableCart({ giftWrapping: true, items: [item({ unitPrice: 1000 })] });
+    const result = calculateCharge(input);
+
+    expect(result.giftWrappingFee).toBe(150);
+    expect(result.total).toBe(1650);
+    expect(Number.isInteger(result.total)).toBe(true);
+    expect(input.giftWrapping).toBe(true);
+  });
+
+  it('ラッピング料金を含めず送料無料の境界を判定する', () => {
+    const result = calculateCharge(
+      immutableCart({ giftWrapping: true, items: [item({ unitPrice: 4999 })] })
+    );
+
+    expect(result.shippingFee).toBe(500);
+    expect(result.total).toBe(5649);
+  });
+
+  it('商品額が送料無料の境界ちょうどならラッピング料金を加えても送料無料になる', () => {
+    const result = calculateCharge(
+      immutableCart({ giftWrapping: true, items: [item({ unitPrice: 5000 })] })
+    );
+
+    expect(result.shippingFee).toBe(0);
+    expect(result.total).toBe(5150);
   });
 });
 

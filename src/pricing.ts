@@ -28,6 +28,8 @@ export interface Cart {
   isMember: boolean;
   /** 使うクーポンのコード（使わないときは省略） */
   couponCode?: string;
+  /** ギフトラッピングを付けるかどうか */
+  giftWrapping?: boolean;
 }
 
 /** 料金計算の結果（金額はすべて円） */
@@ -40,6 +42,8 @@ export interface PricingResult {
   couponDiscount: number;
   /** 送料 */
   shippingFee: number;
+  /** ギフトラッピング料金 */
+  giftWrappingFee: number;
   /** 支払う合計 */
   total: number;
 }
@@ -50,6 +54,8 @@ export const MEMBER_DISCOUNT_RATE = 0.1;
 export const FREE_SHIPPING_THRESHOLD = 5000;
 /** 送料（円） */
 export const SHIPPING_FEE = 500;
+/** ギフトラッピング料金（円） */
+export const GIFT_WRAPPING_FEE = 150;
 
 /** 使えるクーポンと、その割引額（円） */
 export const COUPON_DISCOUNTS: Record<string, number> = {
@@ -103,6 +109,7 @@ export function calculateCharge(cart: Cart): PricingResult {
       memberDiscount: 0,
       couponDiscount: 0,
       shippingFee: 0,
+      giftWrappingFee: 0,
       total: 0,
     };
   }
@@ -112,12 +119,14 @@ export function calculateCharge(cart: Cart): PricingResult {
   const couponDiscount = calculateCouponDiscount(cart);
   const amountAfterDiscount = subtotal - memberDiscount - couponDiscount;
   const shippingFee = amountAfterDiscount >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE;
+  const giftWrappingFee = cart.giftWrapping ? GIFT_WRAPPING_FEE : 0;
 
   return {
     subtotal,
     memberDiscount,
     couponDiscount,
     shippingFee,
-    total: amountAfterDiscount + shippingFee,
+    giftWrappingFee,
+    total: amountAfterDiscount + shippingFee + giftWrappingFee,
   };
 }
