@@ -1,5 +1,5 @@
 ---
-applyTo: "**/*.test.ts"
+applyTo: "**/pricing*.test.ts"
 description: "Vitest の単体テストを書く・直すときの規則"
 ---
 
