@@ -1,6 +1,6 @@
 ---
 agent: 'agent'
-description: 議事録から要件定義書（Markdown）を作成し、判断できない項目は確認事項として質問する
+description: 議事録から要件定義書（Markdown）を作成し、判断できない項目は確認事項として一覧で示す
 ---
 
 # 議事録 → 要件定義書
@@ -11,13 +11,14 @@ description: 議事録から要件定義書（Markdown）を作成し、判断�
 
 - 議事録: ${input:minutes:議事録のパス（例: docs/minutes.md）}（このパスのファイルを読む）
 - テンプレート: #file:docs/templates/requirements_template.md
+- 出力先: ${input:output:要件定義書の出力先（例: docs/requirements.md）}
 
 ## 手順
 
 1. テンプレート `docs/templates/requirements_template.md` の各セクションを埋める
 2. 議事録に書かれていることだけを記載する（推測で補完しない）
-3. 埋められない項目・曖昧な項目は「確認事項」として列挙し、私に質問する
-4. 出力は `docs/requirements.md`（正本＝md）。xlsx は作らない
+3. 埋められない項目・曖昧な項目は「確認事項」に書く。質問はせず、作り終えたら「以下の未確認事項が残っています」として確認事項の一覧をチャットに示す
+4. 出力は入力の「出力先」に書く（正本＝md）。xlsx は作らない
 
 ## 制約
 
