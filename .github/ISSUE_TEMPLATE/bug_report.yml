@@ -1,0 +1,15 @@
+name: 欠陥の報告
+description: テストで見つけた欠陥を報告する
+title: "[欠陥] "
+labels: ["bug"]
+body:
+  - type: input
+    attributes: { label: 発生バージョン・環境 }
+  - type: textarea
+    attributes: { label: 再現手順 }
+  - type: textarea
+    attributes: { label: 期待する結果と実際の結果 }
+  - type: dropdown
+    attributes:
+      label: 重要度
+      options: ["高", "中", "低"]
