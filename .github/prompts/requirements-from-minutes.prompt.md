@@ -9,7 +9,7 @@ description: 議事録から要件定義書（Markdown）を作成し、判断�
 
 ## 入力
 
-- 議事録: #file:docs/minutes.md
+- 議事録: ${input:minutes:議事録のパス（例: docs/minutes.md）}（このパスのファイルを読む）
 - テンプレート: #file:docs/templates/requirements_template.md
 
 ## 手順
