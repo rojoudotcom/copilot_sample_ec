@@ -4,3 +4,4 @@
 - 金額は整数（円）。端数は Math.floor で切り捨てる
 - 異常系は PricingError を throw する（null / -1 で表現しない）
 - テストは Vitest（テストファースト・src/pricing.test.ts）
+- 回答と生成する文書は日本語で書く
