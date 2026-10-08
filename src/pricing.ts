@@ -83,7 +83,7 @@ export function calculateMemberDiscount(cart: Cart): number {
   const target = cart.items
     .filter((item) => !item.onSale)
     .reduce((sum, item) => sum + item.unitPrice * item.quantity, 0);
-  return Math.round(target * MEMBER_DISCOUNT_RATE);
+  return Math.floor(target * MEMBER_DISCOUNT_RATE);
 }
 
 /** クーポン割引の額を計算する。会員割引との併用や無効なコードはエラー */
