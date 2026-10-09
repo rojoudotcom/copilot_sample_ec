@@ -67,12 +67,21 @@ describe('calculateCharge 正常系', () => {
     expect(result.total).toBe(5000);
   });
 
-  it('ラッピングを選択すると合計に150円が加算される', () => {
+it('ラッピングを選択する → ラッピング料金が150円になる', () => {
     const input = Object.freeze(cart({ giftWrapping: true, items: [item({ unitPrice: 3500 })] }));
     const before = { ...input };
     const result = calculateCharge(input);
 
     expect(result.giftWrappingFee).toBe(150);
+    expect(input).toEqual(before);
+    expect(Number.isInteger(result.giftWrappingFee)).toBe(true);
+  });
+
+  it('ラッピングを選択する → 合計が4,150円になる', () => {
+    const input = Object.freeze(cart({ giftWrapping: true, items: [item({ unitPrice: 3500 })] }));
+    const before = { ...input };
+    const result = calculateCharge(input);
+
     expect(result.total).toBe(4150);
     expect(input).toEqual(before);
     expect(Number.isInteger(result.total)).toBe(true);
